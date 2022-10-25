@@ -1647,7 +1647,6 @@ are bound."
          `(vc-annotate-background nil)
          `(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
          `(ansi-color-names-vector (vector ,background ,red ,green ,yellow ,blue ,purple ,aqua ,foreground))
-         `(window-divider-mode nil)
          ))
        (provide-theme ',name))))
 
