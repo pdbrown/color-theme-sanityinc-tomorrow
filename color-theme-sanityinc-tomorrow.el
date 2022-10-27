@@ -143,6 +143,7 @@ setting `frame-background-mode'.
 `MODE' should be set to either `day', `night', `eighties', `blue' or `bright'."
   `(let* ((colors (or (cdr (assoc ,mode color-theme-sanityinc-tomorrow-colors))
                       (error "no such theme flavor")))
+          (mode         ,mode)
           (background   (cdr (assoc 'background colors)))
           (contrast-bg  (cdr (assoc 'selection colors)))
           (highlight    (cdr (assoc 'current-line colors)))
@@ -606,7 +607,12 @@ names to which it refers are bound."
       (outline-minor-1 (:inherit (outline-minor-0 outline-1)))
 
       ;; Parenthesis matching (built-in)
-      (show-paren-match (:background ,purple :foreground ,background))
+      (show-paren-match (:background ,(if (eq mode 'day)
+                                          purple
+                                        ;; else dark theme: use darker purple
+                                        ;; for contrast under light cursor
+                                        "#62446b")
+                                     :foreground ,background))
       (show-paren-mismatch (:background ,red :foreground ,background))
 
       ;; rcirc (built-in)
